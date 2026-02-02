@@ -58,7 +58,7 @@ const submitEdit = async () => {
   }
 
   if (!canEdit.value) {
-    error.value = '공지/뉴스/포토갤러리는 관리자만 수정할 수 있습니다.'
+    error.value = '공지/뉴스/포토갤러리는 관리자만 수정할 수 있습니다ㅇ.'
     return
   }
 
