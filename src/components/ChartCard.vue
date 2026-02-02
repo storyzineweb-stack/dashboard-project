@@ -63,11 +63,11 @@ function drawChart() {
   }
 
   // 데이터셋 색상
-  const colors = ['#667eea', '#f59e0b']
+  const colors: string[] = ['#667eea', '#f59e0b']
 
   // 라인 차트 그리기
   props.data.datasets.forEach((dataset, datasetIndex) => {
-    const color = colors[datasetIndex % colors.length]
+    const color = colors[datasetIndex % colors.length] ?? '#667eea'
     ctx.strokeStyle = color
     ctx.lineWidth = 3
     ctx.beginPath()

@@ -3,8 +3,16 @@ import { ref, computed } from 'vue'
 import StatCard from '@/components/StatCard.vue'
 import ChartCard from '@/components/ChartCard.vue'
 
+type Stat = {
+  id: number
+  title: string
+  value: string | number
+  change: string
+  trend: 'up' | 'down'
+}
+
 // 통계 데이터
-const stats = ref([
+const stats = ref<Stat[]>([
   { id: 1, title: '총 사용자', value: 1247, change: '+12.5%', trend: 'up' },
   { id: 2, title: '월 매출', value: '₩8,450,000', change: '+8.2%', trend: 'up' },
   { id: 3, title: '신규 주문', value: 324, change: '-2.4%', trend: 'down' },

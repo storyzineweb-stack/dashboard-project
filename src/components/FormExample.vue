@@ -5,38 +5,48 @@ import LoadingSpinner from './LoadingSpinner.vue'
 
 const notificationStore = useNotificationStore()
 
-const { formData, errors, touched, isSubmitting, validateAll, handleBlur, handleInput, reset } =
-  useForm(
-    {
-      name: '',
-      email: '',
-      password: '',
-      confirmPassword: '',
-      age: '',
-      phone: ''
-    },
-    {
-      name: [validators.required(), validators.minLength(2), validators.maxLength(50)],
-      email: [validators.required(), validators.email()],
-      password: [validators.required(), validators.minLength(8)],
-      confirmPassword: [
-        validators.required(),
-        {
-          validate: (value) => value === formData.password,
-          message: '비밀번호가 일치하지 않습니다'
-        }
-      ],
-      age: [
-        validators.required(),
-        validators.min(1, '1 이상의 나이를 입력하세요'),
-        validators.max(150, '150 이하의 나이를 입력하세요')
-      ],
-      phone: [
-        validators.required(),
-        validators.pattern(/^010-\d{4}-\d{4}$/, '010-0000-0000 형식으로 입력하세요')
-      ]
-    }
-  )
+type SignupForm = {
+  name: string
+  email: string
+  password: string
+  confirmPassword: string
+  age: string
+  phone: string
+}
+
+const form = useForm<SignupForm>(
+  {
+    name: '',
+    email: '',
+    password: '',
+    confirmPassword: '',
+    age: '',
+    phone: ''
+  },
+  {
+    name: [validators.required(), validators.minLength(2), validators.maxLength(50)],
+    email: [validators.required(), validators.email()],
+    password: [validators.required(), validators.minLength(8)],
+    confirmPassword: [
+      validators.required(),
+      {
+        validate: (value: string) => value === form.formData.password,
+        message: '비밀번호가 일치하지 않습니다'
+      }
+    ],
+    age: [
+      validators.required(),
+      validators.min(1, '1 이상의 나이를 입력하세요'),
+      validators.max(150, '150 이하의 나이를 입력하세요')
+    ],
+    phone: [
+      validators.required(),
+      validators.pattern(/^010-\d{4}-\d{4}$/, '010-0000-0000 형식으로 입력하세요')
+    ]
+  }
+)
+
+const { formData, errors, touched, isSubmitting, validateAll, handleBlur, handleInput, reset } = form
 
 async function handleSubmit() {
   if (!validateAll()) {
