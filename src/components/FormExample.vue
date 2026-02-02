@@ -14,7 +14,7 @@ type SignupForm = {
   phone: string
 }
 
-const form = useForm<SignupForm>(
+const form: ReturnType<typeof useForm<SignupForm>> = useForm<SignupForm>(
   {
     name: '',
     email: '',
@@ -30,7 +30,7 @@ const form = useForm<SignupForm>(
     confirmPassword: [
       validators.required(),
       {
-        validate: (value: string) => value === form.formData.password,
+        validate: (value: string): boolean => value === form.formData.password,
         message: '비밀번호가 일치하지 않습니다'
       }
     ],
